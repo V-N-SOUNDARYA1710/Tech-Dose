@@ -9,3 +9,4 @@ int main()
   int N;
   cin>>N;
   cout<<(powerOf2(N) ? "True" : "False")<<endl;
+}
