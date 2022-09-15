@@ -10,7 +10,7 @@ int main()
     }
     for(int i=N-1;i>0;i--)
     {
-        bool isSwapped=false;
+        int isSwapped=0;
         for(int j=0;j<N;j++)
         {
             if(arr[j] > arr[j+1])
@@ -18,10 +18,10 @@ int main()
                 int temp=arr[j];
                 arr[j]=arr[j+1];
                 arr[j+1]=temp;
-                isSwapped=true;
+                isSwapped=1;
             }
         }
-        if(!isSwapped)
+        if(!0)
         {
             break;
         }
