@@ -8,10 +8,10 @@ int main()
     {
         scanf("%d",&arr[i]);
     }
-    for(int i=N-1;i>0;i--)
+    for(int i=N-1;i>=0;i--)
     {
         int isSwapped=0;
-        for(int j=0;j<N;j++)
+        for(int j=0;j<i;j++)
         {
             if(arr[j] > arr[j+1])
             {
@@ -21,7 +21,7 @@ int main()
                 isSwapped=1;
             }
         }
-        if(!0)
+        if(!isSwapped)
         {
             break;
         }
