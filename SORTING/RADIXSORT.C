@@ -1,5 +1,3 @@
-// Radix Sort in C Programming
-
 #include <stdio.h>
 int getMax(int array[], int n) {
   int max = array[0];
