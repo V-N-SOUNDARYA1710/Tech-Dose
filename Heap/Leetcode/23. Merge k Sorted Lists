@@ -1,0 +1,26 @@
+class Solution
+{
+  public ListNode mergeKLists(ListNode[] lists)
+  {
+     PriorityQueue<ListNode>  minHeap= new PriorityQueue<>((a,b)->{
+        return a.val - b.val;
+     });
+     ListNode root= new ListNode(-1, null);
+     ListNode trav= root;
+     for(int i= 0; i< lists.length; i++){
+         if(lists[i] != null)
+             minHeap.offer(lists[i]);
+     }
+     while(!minHeap.isEmpty())
+     {
+        ListNode temp= minHeap.poll();
+        trav.next= temp;
+        trav= trav.next;
+        ListNode next= temp.next; 
+        temp.next= null;
+        if(next != null)
+           minHeap.offer(next);
+     }
+     return root.next;
+  }
+}
