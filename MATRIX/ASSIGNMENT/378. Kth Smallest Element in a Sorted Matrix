@@ -1,0 +1,26 @@
+class Solution {
+    public int countLessOrEqual(int m[][],int mid){
+        int c=m[0].length-1;
+        int count=0;
+        for(int r=0;r<m.length;r++){
+            while(c>=0 && m[r][c]>mid){
+                c--;
+            }
+            count+=(c+1);
+        }
+        return count;
+    }
+    public int kthSmallest(int[][] matrix, int k) {
+        int low=matrix[0][0],high=matrix[matrix.length-1][matrix[0].length-1],ans=0;
+        while(low<=high){
+            int mid=low+(high-low)/2;
+            if(countLessOrEqual(matrix,mid)>=k){
+                ans=mid;
+                high=mid-1;
+            }else{
+                low=mid+1;
+            }
+        }
+        return ans;
+    }
+}
