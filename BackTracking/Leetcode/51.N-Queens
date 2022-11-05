@@ -1,0 +1,98 @@
+class Solution {
+    List<List<String>> res=new LinkedList<>();
+    public List<List<String>> solveNQueens(int n) {
+        char[][] board=new char[n][n];
+        for(char[] ch:board)
+        {
+            Arrays.fill(ch, '.');
+        }
+        helper(board,0,0,n);
+        return res;
+    }
+    private void helper(char[][] board,int row,int col,int n)
+    {
+        if(col==board[0].length)
+        {
+            col=0;
+            row++;
+        }
+        if(n==0)
+        {
+            res.add(toString(board));
+            return;
+        }
+        if(row==board.length)
+            return;
+        if(isValid(board,row,col))
+        {
+            board[row][col]='Q';
+            n--;
+            helper(board,row,col+1,n);
+            board[row][col]='.';
+            n++;
+        }
+        helper(board,row,col+1,n);
+    }
+    private List<String> toString(char[][] board)
+    {
+        List<String> list=new LinkedList<>();
+        StringBuilder str;
+        for(char[] ch:board)
+        {
+            str=new StringBuilder();
+            for(char cur:ch)
+            {
+                str.append(cur);
+            }
+            list.add(str.toString());
+        }
+        return list;
+    }
+    private boolean isValid(char[][] board,int row,int col)
+    {
+        int N=board.length;
+        for(int i=0;i<N;i++)
+        {
+            if(board[i][col]!='.')
+                return false;
+            if(board[row][i]!='.')
+                return false;
+        }
+        int i=row,j=col;
+        while(0<=i && 0<=j)
+        {
+            if(board[i][j]!='.')
+                return false;
+            i--;
+            j--;
+        }
+        i=row;
+        j=col;
+        while(0<=i && j<N)
+        {
+            if(board[i][j]!='.')
+                return false;
+            i--;
+            j++;
+        }
+        i=row;
+        j=col;
+        while(i<N && j<N)
+        {
+            if(board[i][j]!='.')
+                return false;
+            i++;
+            j++;
+        }
+        i=row;
+        j=col;
+        while(i<N && 0<=j)
+        {
+            if(board[i][j]!='.')
+                return false;
+            i++;
+            j--;
+        }
+        return true;
+    }
+}
