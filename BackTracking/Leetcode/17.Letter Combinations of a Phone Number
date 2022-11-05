@@ -1,0 +1,71 @@
+/*class Solution {
+    public List<String> letterCombinations(String digits) {
+        List<String> output_arr=new ArrayList<String>();
+        if(digits==null || digits.length()==0)
+            return output_arr;
+        String[] mapping={
+            "0" ,
+            "1" ,
+            "abc" ,
+            "def" ,
+            "ghi" ,
+            "jkl" ,
+            "mno", 
+            " pqrs" ,
+            "tuv" ,
+            "wxyz"
+            };
+        letterCombinationsRecursive(output_arr,digits,"", 0,mapping);
+        return output_arr;
+    }
+    public void letterCombinationsRecursive(List<String> output_arr,String digits,String current,int index,String[] mapping)
+    {
+        if(index==digits.length())
+        {
+            output_arr.add(current);
+            return;
+        }
+        String letters=mapping[digits.charAt(index)-'0'];
+        for(int i=0;i<letters.length();i++)
+        {
+            letterCombinationsRecursive(output_arr,digits,current+letters.charAt(i),index+1,mapping);
+        }
+    }
+}*/
+class Solution {
+    public List<String> letterCombinations(String digits) {
+        List<String> answer = new ArrayList<>();
+        if(digits.length() == 0)return answer;
+        HashMap<Character, String> hm = new HashMap<>();
+        hm.put('2', "abc");
+        hm.put('3', "def");
+        hm.put('4', "ghi");
+        hm.put('5', "jkl");        
+        hm.put('6', "mno");
+        hm.put('7', "pqrs");
+        hm.put('8', "tuv");
+        hm.put('9', "wxyz");
+        String temp ="";
+        int index = 0;
+        backTrack(index, temp, digits, answer, hm);
+        return answer;
+    }
+    
+    public static void backTrack
+        (int i, String temp, String digits, List<String> answer, HashMap<Character, String> hm )
+    {
+        if(i == digits.length() ){
+            answer.add(temp);
+            return;
+        }
+        char digit = digits.charAt(i);
+        String str = hm.get(digit);
+        for(int j=0; j< str.length(); j++){
+            char c = str.charAt(j);
+            temp += c;
+            backTrack(i + 1, temp, digits, answer, hm);
+            temp = temp.substring(0,temp.length()-1);
+        }
+        
+    }
+}
