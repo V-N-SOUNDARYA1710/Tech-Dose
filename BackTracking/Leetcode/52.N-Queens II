@@ -1,0 +1,40 @@
+class Solution 
+{
+    public int totalNQueens(int n) 
+    {
+        if (n <= 0) 
+        {
+            return 0;
+        }
+        if (n == 1) 
+        {
+            return 1;
+        }
+        return totalNQueensHelper(new BitSet(5 * n), 0, n);
+    }
+    private int totalNQueensHelper(BitSet occupied, int row, int n) 
+    {
+        if (row == n) 
+        {
+            return 1;
+        }
+        int count = 0;
+        for (int col = 0; col < n; col++) 
+        {
+            int diag45 = n + (row + col);
+            int diag135 = 3 * n + (n + row - col);
+            if (occupied.get(col) || occupied.get(diag45) || occupied.get(diag135)) 
+            {
+                continue;
+            }
+            occupied.set(col);
+            occupied.set(diag45);
+            occupied.set(diag135);
+            count += totalNQueensHelper(occupied, row + 1, n);
+            occupied.clear(col);
+            occupied.clear(diag45);
+            occupied.clear(diag135);
+        }
+        return count;
+    }
+}
