@@ -1,0 +1,18 @@
+void nextPermutation(int* nums, int numsSize) 
+{
+  int dest = numsSize - 1;
+  while (dest-- && nums[dest] >= nums[dest + 1]);
+
+  if (0 <= dest) {
+    int target = numsSize;
+    while (nums[--target] <= nums[dest]);
+    int tmp = nums[dest];
+    nums[dest] = nums[target];
+    nums[target] = tmp;
+  }
+  for (int back = numsSize - 1; dest + 1 < back; ) {
+    int tmp = nums[++dest];
+    nums[dest] = nums[back];
+    nums[back--] = tmp;
+  }
+}
