@@ -1,0 +1,22 @@
+class Solution {
+    public List<String> wordBreak(String s, List<String> dictionary) {
+        List<String> ans = new ArrayList<>();
+        helper(s, dictionary, ans, "");
+        return ans;
+    }
+
+    void helper(String s, List<String> d, List<String> ans, String temp){
+        if(s.length() == 0){
+            ans.add(temp.trim());
+            return;
+        }
+    
+        for(int i = s.length() - 1; i >= 0; i--){
+            String right = s.substring(i, s.length());
+            if(d.contains(right)){
+                String left = s.substring(0, i);
+                helper(left, d, ans, right + " " + temp);
+            }
+        }
+    }
+}
