@@ -1,0 +1,12 @@
+class Solution {
+    public int twoCitySchedCost(int[][] costs) {
+        int minSum=0;
+        int length=costs.length;
+        Arrays.sort(costs,(a,b)->(a[0]-a[1])-(b[0]-b[1]));
+        for(int i=0;i<length;i++)
+        {
+            minSum+=i<length/2 ? costs[i][0]:costs[i][1];
+        }
+        return minSum;
+    }
+}
